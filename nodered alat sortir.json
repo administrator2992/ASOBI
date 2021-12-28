@@ -1,0 +1,707 @@
+[
+    {
+        "id": "e5bf9efee04d3bf5",
+        "type": "tab",
+        "label": "Node alat sortir",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7990beae97214d9d",
+        "type": "mqtt in",
+        "z": "e5bf9efee04d3bf5",
+        "name": "Belum Matang",
+        "topic": "ESP32/kondisi/bm",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "25d778cca041aa6c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "07c1f107581b9b72"
+            ]
+        ]
+    },
+    {
+        "id": "07c1f107581b9b72",
+        "type": "function",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "func": "var conta = flow.get(\"cont\");\nvar count = 1;\nif (msg.payload.length !== 0) {\n    conta = conta + count;\n    msg.payload = conta;\n    flow.set(\"cont\", conta);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nvar conta = flow.get(\"cont\");\nconta = 0;\nflow.set(\"cont\", conta);",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "10a03b0f34b994ac",
+                "1166ca0b352ed46c",
+                "54692a9be16e6257"
+            ]
+        ]
+    },
+    {
+        "id": "1166ca0b352ed46c",
+        "type": "change",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "ESP32/kondisi/bm",
+                "fromt": "str",
+                "to": "Belum Matang",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "ESP32/kondisi/m",
+                "fromt": "str",
+                "to": "Matang",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "ESP32/kondisi/tm",
+                "fromt": "str",
+                "to": "Terlalu Matang",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 140,
+        "wires": [
+            [
+                "32858b55774ea365"
+            ]
+        ]
+    },
+    {
+        "id": "e3389e216bfb8d34",
+        "type": "mqtt in",
+        "z": "e5bf9efee04d3bf5",
+        "name": "Matang",
+        "topic": "ESP32/kondisi/m",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "25d778cca041aa6c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 210,
+        "y": 300,
+        "wires": [
+            [
+                "169dfbca0422ac06"
+            ]
+        ]
+    },
+    {
+        "id": "169dfbca0422ac06",
+        "type": "function",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "func": "var conta = flow.get(\"cont1\");\nvar count = 1;\nif (msg.payload.length !== 0) {\n    conta = conta + count;\n    msg.payload = conta;\n    flow.set(\"cont1\", conta);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nvar conta = flow.get(\"cont1\");\nconta = 0;\nflow.set(\"cont1\", conta);",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "05568d21c31e608a",
+                "1166ca0b352ed46c",
+                "1aee99dbc4b702ee"
+            ]
+        ]
+    },
+    {
+        "id": "6bad79ea339b8067",
+        "type": "mqtt in",
+        "z": "e5bf9efee04d3bf5",
+        "name": "Terlalu Matang",
+        "topic": "ESP32/kondisi/tm",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "25d778cca041aa6c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 200,
+        "y": 360,
+        "wires": [
+            [
+                "de7cf1132507a930"
+            ]
+        ]
+    },
+    {
+        "id": "de7cf1132507a930",
+        "type": "function",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "func": "var conta = flow.get(\"cont2\");\nvar count = 1;\nif (msg.payload.length !== 0) {\n    conta = conta + count;\n    msg.payload = conta;\n    flow.set(\"cont2\", conta);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nvar conta = flow.get(\"cont2\");\nconta = 0;\nflow.set(\"cont2\", conta);",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 360,
+        "wires": [
+            [
+                "04700d7097a1c7be",
+                "1166ca0b352ed46c",
+                "3a274188208a7120"
+            ]
+        ]
+    },
+    {
+        "id": "b8d4d73ae41a7edb",
+        "type": "ui_svg_graphics",
+        "z": "e5bf9efee04d3bf5",
+        "group": "68c7aa06aa81358d",
+        "order": 0,
+        "width": "10",
+        "height": "8",
+        "svgString": "<svg\n   xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n   xmlns:cc=\"http://creativecommons.org/ns#\"\n   xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n   xmlns:svg=\"http://www.w3.org/2000/svg\"\n   xmlns=\"http://www.w3.org/2000/svg\"\n   xmlns:sodipodi=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd\"\n   xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\"\n   width=\"148mm\"\n   height=\"105mm\"\n   viewBox=\"0 0 148 105\"\n   preserveAspectRatio=\"xMidYMid meet\"\n   version=\"1.1\"\n   id=\"svg20\"\n   sodipodi:docname=\"draw.svg\"\n   inkscape:version=\"1.0.1 (3bc2e813f5, 2020-09-07)\">\n  <metadata\n     id=\"metadata26\">\n    <rdf:RDF>\n      <cc:Work\n         rdf:about=\"\">\n        <dc:format>image/svg+xml</dc:format>\n        <dc:type\n           rdf:resource=\"http://purl.org/dc/dcmitype/StillImage\" />\n      </cc:Work>\n    </rdf:RDF>\n  </metadata>\n  <defs\n     id=\"defs24\" />\n  <sodipodi:namedview\n     pagecolor=\"#ffffff\"\n     bordercolor=\"#666666\"\n     borderopacity=\"1\"\n     objecttolerance=\"10\"\n     gridtolerance=\"10\"\n     guidetolerance=\"10\"\n     inkscape:pageopacity=\"0\"\n     inkscape:pageshadow=\"2\"\n     inkscape:window-width=\"1920\"\n     inkscape:window-height=\"1013\"\n     id=\"namedview22\"\n     showgrid=\"false\"\n     inkscape:zoom=\"2.1217063\"\n     inkscape:cx=\"259.04872\"\n     inkscape:cy=\"236.1307\"\n     inkscape:window-x=\"1699\"\n     inkscape:window-y=\"-9\"\n     inkscape:window-maximized=\"1\"\n     inkscape:current-layer=\"svg20\"\n     inkscape:document-rotation=\"0\"\n     showguides=\"true\"\n     inkscape:guide-bbox=\"true\">\n    <sodipodi:guide\n       position=\"120.57474,78.300387\"\n       orientation=\"1,0\"\n       id=\"guide877\" />\n  </sodipodi:namedview>\n  <rect\n     id=\"svgEditorBackground\"\n     x=\"0\"\n     y=\"0\"\n     width=\"148\"\n     height=\"105\"\n     style=\"fill:none; stroke: none;\" />\n  <text\n     style=\"fill:black;font-family:Arial;font-size:20px;\"\n     x=\"30.055\"\n     y=\"62.422\"\n     id=\"e1_texte\" />\n  <text\n     style=\"fill:black;font-family:Arial;font-size:20px;\"\n     x=\"29.8624\"\n     y=\"82.073\"\n     id=\"e2_texte\"\n     textLength=\"4.204845183486242\" />\n  <text\n     style=\"fill:black;font-family:Arial;font-size:20px;\"\n     x=\"68.5872\"\n     y=\"82.2656\"\n     id=\"e3_texte\" />\n  <text\n     style=\"fill:black;font-family:Arial;font-size:20px;\"\n     x=\"116.174\"\n     y=\"73.4032\"\n     id=\"e4_texte\" />\n  <text\n     style=\"fill:black;font-family:Lucida Sans;font-size:12px;\"\n     x=\"34.679\"\n     y=\"78.991\"\n     id=\"e5_texte\" />\n  <g\n     id=\"g898\"\n     transform=\"translate(6.4540692,0.02750633)\">\n    <g\n       id=\"alat\"\n       transform=\"matrix(0.3295826,0,0,0.3295826,-21.975445,16.140523)\"\n       style=\"fill:#999999\">\n      <path\n         id=\"rect833\"\n         style=\"fill:#999999;stroke:#000000;stroke-width:0.368532\"\n         d=\"m 110.0508,38.167053 33.3051,39.05181 v 41.599857 6.86564 16.59379 l 90.08661,13.73108 V 132.54979 L 172.06972,123.1954 V 77.218863 l 33.30511,-39.05181 z\" />\n      <path\n         id=\"rect875\"\n         style=\"fill:#999999;stroke:#000000;stroke-width:0.573209\"\n         d=\"M 148.26915,118.01035 H 167.472 l 4.40721,64.15196 h -28.64688 z\" />\n    </g>\n    <rect\n       style=\"fill:#d1c1b5;fill-opacity:1;stroke:#000000;stroke-width:0.706012;stroke-miterlimit:4;stroke-dasharray:none\"\n       id=\"rect857\"\n       width=\"53.097218\"\n       height=\"15.686292\"\n       x=\"67.477516\"\n       y=\"26.699612\"\n       ry=\"5.10427\" />\n    <text\n       style=\"font-size:8px;font-family:'Lucida Sans';fill:#000000\"\n       x=\"107.73485\"\n       y=\"37.43338\"\n       id=\"e6_texte\">0</text>\n    <text\n       xml:space=\"preserve\"\n       style=\"font-size:4.5861px;line-height:1.25;font-family:'Autumn in November';-inkscape-font-specification:'Autumn in November';stroke-width:0.264583\"\n       x=\"69.993721\"\n       y=\"35.807964\"\n       id=\"text869\"><tspan\n         sodipodi:role=\"line\"\n         id=\"tspan867\"\n         x=\"69.993721\"\n         y=\"35.807964\"\n         style=\"font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583\">Belum Matang</tspan></text>\n    <rect\n       style=\"fill:#d1c1b5;fill-opacity:1;stroke:#000000;stroke-width:0.706116;stroke-miterlimit:4;stroke-dasharray:none\"\n       id=\"rect863\"\n       width=\"53.099236\"\n       height=\"15.690332\"\n       x=\"67.475502\"\n       y=\"44.620583\"\n       ry=\"5.1055846\" />\n    <text\n       style=\"font-size:8px;font-family:'Lucida Sans';fill:#000000\"\n       x=\"107.7626\"\n       y=\"55.356373\"\n       id=\"e7_texte\">0</text>\n    <text\n       xml:space=\"preserve\"\n       style=\"font-size:4.5861px;line-height:1.25;font-family:'Autumn in November';-inkscape-font-specification:'Autumn in November';stroke-width:0.264583\"\n       x=\"80.718185\"\n       y=\"53.660419\"\n       id=\"text873\"><tspan\n         sodipodi:role=\"line\"\n         id=\"tspan871\"\n         x=\"80.718185\"\n         y=\"53.660419\"\n         style=\"font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583\">Matang</tspan></text>\n    <rect\n       style=\"fill:#d1c1b5;fill-opacity:1;stroke:#000000;stroke-width:0.706691;stroke-miterlimit:4;stroke-dasharray:none\"\n       id=\"rect865\"\n       width=\"53.110374\"\n       height=\"15.712589\"\n       x=\"67.464371\"\n       y=\"62.532448\"\n       ry=\"5.1128268\" />\n    <text\n       style=\"font-size:8px;font-family:'Lucida Sans';fill:#000000\"\n       x=\"108.40604\"\n       y=\"73.279366\"\n       id=\"e8_texte\">0</text>\n    <text\n       xml:space=\"preserve\"\n       style=\"font-size:4.5861px;line-height:1.25;font-family:'Autumn in November';-inkscape-font-specification:'Autumn in November';stroke-width:0.264583\"\n       x=\"71.205475\"\n       y=\"71.653954\"\n       id=\"text877\"><tspan\n         sodipodi:role=\"line\"\n         id=\"tspan875\"\n         x=\"71.205475\"\n         y=\"71.653954\"\n         style=\"font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583\">Terlalu Matang</tspan></text>\n  </g>\n</svg>",
+        "clickableShapes": [],
+        "javascriptHandlers": [],
+        "smilAnimations": [],
+        "bindings": [],
+        "showCoordinates": false,
+        "autoFormatAfterEdit": false,
+        "showBrowserErrors": false,
+        "showBrowserEvents": false,
+        "enableJsDebugging": false,
+        "sendMsgWhenLoaded": false,
+        "noClickWhenDblClick": false,
+        "outputField": "payload",
+        "editorUrl": "//drawsvg.org/drawsvg.html",
+        "directory": "",
+        "panning": "disabled",
+        "zooming": "disabled",
+        "panOnlyWhenZoomed": false,
+        "doubleClickZoomEnabled": false,
+        "mouseWheelZoomEnabled": false,
+        "dblClickZoomPercentage": 150,
+        "cssString": "",
+        "name": "",
+        "x": 860,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "10a03b0f34b994ac",
+        "type": "change",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"command\":\"update_text\",\"selector\":\"#e6_texte\",\"textContent\": payload}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 260,
+        "wires": [
+            [
+                "b8d4d73ae41a7edb"
+            ]
+        ]
+    },
+    {
+        "id": "05568d21c31e608a",
+        "type": "change",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"command\":\"update_text\",\"selector\":\"#e7_texte\",\"textContent\": payload}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 300,
+        "wires": [
+            [
+                "b8d4d73ae41a7edb"
+            ]
+        ]
+    },
+    {
+        "id": "04700d7097a1c7be",
+        "type": "change",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"command\":\"update_text\",\"selector\":\"#e8_texte\",\"textContent\": payload}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 340,
+        "wires": [
+            [
+                "b8d4d73ae41a7edb"
+            ]
+        ]
+    },
+    {
+        "id": "32858b55774ea365",
+        "type": "ui_chart",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "group": "88af8eb0f0e9916e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Chart",
+        "chartType": "pie",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 850,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "04505a055a9187af",
+        "type": "inject",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 480,
+        "wires": [
+            [
+                "9b1477318f8df795"
+            ]
+        ]
+    },
+    {
+        "id": "8c1adc4da0fecf42",
+        "type": "mqtt out",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "topic": "coba_out",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "25d778cca041aa6c",
+        "x": 520,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "9b1477318f8df795",
+        "type": "ui_switch",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "label": "Start n Stop",
+        "tooltip": "",
+        "group": "4840043319bf6d72",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 360,
+        "y": 480,
+        "wires": [
+            [
+                "8c1adc4da0fecf42"
+            ]
+        ]
+    },
+    {
+        "id": "33b90d6883bdf8a9",
+        "type": "change",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "cont",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "cont1",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "cont2",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a8e7f208d261b8b0",
+        "type": "change",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[]",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 20,
+        "wires": [
+            [
+                "32858b55774ea365"
+            ]
+        ]
+    },
+    {
+        "id": "4edd34dee4bece91",
+        "type": "ui_button",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "group": "4840043319bf6d72",
+        "order": 2,
+        "width": "2",
+        "height": "2",
+        "passthru": false,
+        "label": "CLEAR CHART",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 560,
+        "y": 80,
+        "wires": [
+            [
+                "a8e7f208d261b8b0"
+            ]
+        ]
+    },
+    {
+        "id": "a99ec89d7fbcb0eb",
+        "type": "ui_button",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "group": "4840043319bf6d72",
+        "order": 2,
+        "width": "2",
+        "height": "2",
+        "passthru": false,
+        "label": "CLEAR DATA",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 200,
+        "y": 180,
+        "wires": [
+            [
+                "e78b564fa55d31df",
+                "33b90d6883bdf8a9"
+            ]
+        ]
+    },
+    {
+        "id": "e78b564fa55d31df",
+        "type": "change",
+        "z": "e5bf9efee04d3bf5",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "10a03b0f34b994ac",
+                "05568d21c31e608a",
+                "04700d7097a1c7be"
+            ]
+        ]
+    },
+    {
+        "id": "3a274188208a7120",
+        "type": "influxdb out",
+        "z": "e5bf9efee04d3bf5",
+        "influxdb": "2762da878cbc9447",
+        "name": "data_tm",
+        "measurement": "terlalu_matang",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 740,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1aee99dbc4b702ee",
+        "type": "influxdb out",
+        "z": "e5bf9efee04d3bf5",
+        "influxdb": "2762da878cbc9447",
+        "name": "data_m",
+        "measurement": "matang",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 740,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "54692a9be16e6257",
+        "type": "influxdb out",
+        "z": "e5bf9efee04d3bf5",
+        "influxdb": "2762da878cbc9447",
+        "name": "data_bm",
+        "measurement": "belum_matang",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 740,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "25d778cca041aa6c",
+        "type": "mqtt-broker",
+        "name": "IOT Broker TF ITB",
+        "broker": "iot.tf.itb.ac.id",
+        "port": "1884",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "68c7aa06aa81358d",
+        "type": "ui_group",
+        "name": "Jumlah Buah Perkondisi",
+        "tab": "9826c47e48c3bd82",
+        "order": 1,
+        "disp": true,
+        "width": "11",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "88af8eb0f0e9916e",
+        "type": "ui_group",
+        "name": "Persentasi Kondisi Buah",
+        "tab": "9826c47e48c3bd82",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4840043319bf6d72",
+        "type": "ui_group",
+        "name": "Tombol",
+        "tab": "9826c47e48c3bd82",
+        "order": 5,
+        "disp": true,
+        "width": "4",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2762da878cbc9447",
+        "type": "influxdb",
+        "hostname": "172.20.10.3",
+        "port": "8086",
+        "protocol": "http",
+        "database": "sortir_warna",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "9826c47e48c3bd82",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
